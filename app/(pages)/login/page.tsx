@@ -1,6 +1,6 @@
-import { options } from '@/app/api/auth/[...nextauth]/route';
 import SigninForm from '@/app/components/SigninForm/SigninForm';
 import AuthLayout from '@/app/Layouts/AuthLayout/AuthLayout';
+import { options } from '@/app/lib/auth';
 import { getServerSession } from 'next-auth';
 import React from 'react';
 

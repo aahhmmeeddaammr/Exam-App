@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormInput from "../FormInput/FormInput";
 import AuthNavbar from "../AuthNavbar/AuthNavbar";
 import Link from "next/link";
@@ -12,7 +12,13 @@ const NewPassword = () => {
   const [userNewPassword, setUserNewPassword] = useState("");
   const [userRePassword, setUserRePassword] = useState("");
   const [error, setError] = useState("");
-  const userEmail = localStorage.getItem("userEmail");
+  let userEmail: string | null;
+  useEffect(() => {
+    userEmail = localStorage.getItem("userEmail");
+    if (!userEmail) {
+      router.push("/login");
+    }
+  }, []);
   const router = useRouter();
   const handlesubmit = async () => {
     const { response } = await ResetPassword(
@@ -25,9 +31,7 @@ const NewPassword = () => {
     }
     console.log(response);
   };
-  if (!userEmail) {
-    router.push("/login");
-  }
+
   return (
     <div className="container pt-20  flex flex-col justify-center   h-full ">
       <div className=" absolute top-[80px] left-0 right-[80px]">
@@ -58,8 +62,7 @@ const NewPassword = () => {
         </div>
 
         <Button label="Sign in" variant="primary" onclick={handlesubmit} />
-        <SignInWith/>
-
+        <SignInWith />
       </div>
     </div>
   );

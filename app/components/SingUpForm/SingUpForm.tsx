@@ -21,9 +21,9 @@ const SingUpForm = () => {
     firstName: false,
     lastName: false,
     email: false,
-    phone:false,
+    phone: false,
     password: false,
-    confirmPassword:false,
+    confirmPassword: false,
   });
 
   const validate = () => {
@@ -31,9 +31,9 @@ const SingUpForm = () => {
       firstName: false,
       lastName: false,
       email: false,
-      phone:false,
+      phone: false,
       password: false,
-      confirmPassword:false,
+      confirmPassword: false,
     };
 
     if (!userFirstName || userFirstName.length < 3) {
@@ -45,11 +45,11 @@ const SingUpForm = () => {
     if (!userEmail || !/\S+@\S+\.\S+/.test(userEmail)) {
       newErrors.email = true;
     }
-    if(!userPhone  || !/^01[1250][0-9]{8}$/.test(userPhone)) {
-      newErrors.phone = true
+    if (!userPhone || !/^01[1250][0-9]{8}$/.test(userPhone)) {
+      newErrors.phone = true;
     }
     if (!userPassword || userPassword.length < 6) {
-      newErrors.password =true;
+      newErrors.password = true;
     }
     if (userPassword !== userConfirmPassword) {
       newErrors.confirmPassword = true;
@@ -60,7 +60,6 @@ const SingUpForm = () => {
   };
 
   const handleSubmit = () => {
-    
     if (validate()) {
       console.log({
         firstName: userFirstName,
@@ -72,23 +71,23 @@ const SingUpForm = () => {
       signup();
     }
   };
-  const signup = async ()=>{
+  const signup = async () => {
     console.log("skmcwqek");
-    
-    const formData ={
-      username:userEmail.split("@")[0],
-      firstName:userFirstName,
-      lastName:userLastName,
+
+    const formData = {
+      username: userEmail.split("@")[0],
+      firstName: userFirstName,
+      lastName: userLastName,
       email: userEmail,
-      password:userPassword,
-      rePassword:userConfirmPassword,
-      phone:userPhone
-  }
-    const data = await SignUp(JSON.stringify(formData))
-    if(data.response.message=="success"){
-      navigate.push("/login")
+      password: userPassword,
+      rePassword: userConfirmPassword,
+      phone: userPhone,
+    };
+    const data = await SignUp(JSON.stringify(formData));
+    if (data.response.message == "success") {
+      navigate.push("/login");
     }
-  }
+  };
   return (
     <div className="container pt-20 flex flex-col justify-center h-full">
       <div className="absolute top-[80px] left-0 right-[80px]">
@@ -106,7 +105,6 @@ const SingUpForm = () => {
               errors.firstName ? "border-red-500" : "border-gray-300"
             }`}
           />
-        
         </div>
         <div>
           <FormInput
@@ -118,7 +116,6 @@ const SingUpForm = () => {
               errors.lastName ? "border-red-500" : "border-gray-300"
             }`}
           />
-          
         </div>
         <div>
           <FormInput
@@ -130,7 +127,6 @@ const SingUpForm = () => {
               errors.email ? "border-red-500" : "border-gray-300"
             }`}
           />
-          
         </div>
         <div>
           <FormInput
@@ -142,7 +138,6 @@ const SingUpForm = () => {
               errors.phone ? "border-red-500" : "border-gray-300"
             }`}
           />
-         
         </div>
         <div>
           <FormInput
@@ -154,7 +149,6 @@ const SingUpForm = () => {
               errors.password ? "border-red-500" : "border-gray-300"
             }`}
           />
-          
         </div>
         <div>
           <FormInput
@@ -166,20 +160,21 @@ const SingUpForm = () => {
               errors.password ? "border-red-500" : "border-gray-300"
             }`}
           />
-         
         </div>
-    
+
         <div className="flex justify-end">
           <Link className="text-MainText" href={"/resetpassword"}>
             Recover Password?
           </Link>
         </div>
-        <Button label="Sign up" variant="primary" onclick={()=>{
-         handleSubmit()
-          
-        }} />
-        <SignInWith/>
-
+        <Button
+          label="Sign up"
+          variant="primary"
+          onclick={() => {
+            handleSubmit();
+          }}
+        />
+        <SignInWith />
       </div>
     </div>
   );
